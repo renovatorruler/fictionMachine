@@ -68,7 +68,7 @@
         "setting": "The Valdren Empire - a declining multi-ethnic empire",
         "time_period": "Pre-industrial, roughly 1700s equivalent",
         "genre": "Historical fantasy",
-        "tone": "Serious with moments of warmth; melancholic hope"
+        "tone": "Grief-shadowed but defiant; loss is named, not softened"
       },
       "mappings": {
         "protagonist": {
@@ -79,19 +79,19 @@
         },
         "antagonist": {
           "concrete": "The Valdren Empire, embodied in Governor Aldric",
-          "details": "Aldric is not evil—he genuinely believes integration is best for everyone. The empire is declining, becoming more extractive out of desperation, not malice.",
+          "details": "Aldric genuinely believes integration is best for everyone. This makes him more dangerous than a tyrant—he cannot be reasoned with, because he thinks he's saving the Kaelish from themselves. The empire is declining, becoming more extractive as it weakens.",
           "weight": "heavy",
-          "resonance": "Oppressors often believe they're helping; this prevents easy villain-ization"
+          "resonance": "The most dangerous oppressors believe they're helping; there is no negotiating with a savior"
         },
         "trap_mechanism": {
           "concrete": "Economic dependence and historical trauma",
-          "details": "Kaelish trade routes run through imperial territory. The last rebellion (40 years ago) ended in massacre. Mira's brother was among the dead.",
+          "details": "Kaelish trade routes run through imperial territory. The last rebellion (40 years ago) ended in massacre—six hundred dead in three days. Mira's brother Daveth was among them. She identified his body.",
           "weight": "medium",
           "resonance": "Both practical constraints and psychological wounds—mirrors abuse dynamics"
         },
         "catalyst": {
           "concrete": "The Language Edict",
-          "details": "New imperial law banning Kaelish language in schools. Mira's grandson comes home crying, punished for speaking their language.",
+          "details": "New imperial law banning Kaelish language in schools. Mira's grandson comes home crying, hand marked with a cane, for speaking their language.",
           "weight": "medium",
           "resonance": "Attacks on language/culture are attacks on existence; makes abstract oppression personal"
         },
@@ -103,15 +103,15 @@
         },
         "stakes": {
           "concrete": "Cultural survival vs. physical safety",
-          "details": "Stay: lose language, identity erodes over generations, but probably survive. Leave: possible war, but chance to exist as themselves.",
+          "details": "Stay: lose language, identity erodes over generations, but probably survive. Leave: war is likely—the empire has never let a region go peacefully. People will die. Maybe hundreds. Maybe her grandson among them.",
           "weight": "medium",
           "resonance": "Neither choice is safe; this mirrors real trapped situations"
         },
         "ally_1": {
           "concrete": "Tomasz, an old man from a region that successfully seceded 20 years ago",
-          "details": "Visits as a trade envoy. His people are poor but free. He doesn't advocate—just exists as proof.",
+          "details": "Visits as a trade envoy. His people are poor but free. He doesn't advocate—just exists as proof. His left arm ends at the elbow; he lost it in their rebellion.",
           "weight": "light",
-          "resonance": "Living proof that leaving is survivable"
+          "resonance": "Living proof that leaving is survivable—and costs something"
         },
         "ally_2": {
           "concrete": "Sera, Mira's daughter",
@@ -121,13 +121,13 @@
         },
         "obstacle_internal": {
           "concrete": "Mira's guilt over her brother's death",
-          "details": "She encouraged him to join the last rebellion. He died. She swore never again. Her caution is penance.",
+          "details": "She encouraged him to join the last rebellion. He died. She swore never again. Her caution is penance—and also cowardice, and she knows it.",
           "weight": "medium",
           "resonance": "Internalized responsibility for past failure; common in trapped people"
         },
         "obstacle_external": {
           "concrete": "Other council members who profit from imperial trade",
-          "details": "Not villains—just people whose comfort depends on the status quo.",
+          "details": "Varen and his faction. They're not villains—just people whose comfort depends on the status quo. They will call Mira a warmonger. They will be right.",
           "weight": "light",
           "resonance": "Shows how systems of oppression are maintained by ordinary self-interest"
         }
@@ -140,7 +140,7 @@
           {
             "id": "act1_opening",
             "name": "The Council of Patience",
-            "content": "Council meeting about responding to new imperial taxes. Young members want protest. Mira counsels patience, accommodation. She wins the vote.",
+            "content": "Council meeting about responding to new imperial taxes. Young members want protest. Mira counsels patience, accommodation. She wins the vote. Varen thanks her afterward. She feels sick but tells herself it's wisdom.",
             "weight": "medium",
             "purpose": "Establish protagonist's current worldview and respected position",
             "elements_used": ["protagonist", "obstacle_external"],
@@ -149,7 +149,7 @@
           {
             "id": "act1_home",
             "name": "Teaching in Secret",
-            "content": "Mira teaches her grandchildren Kaelish words, songs, stories. It's illegal to teach formally, but family transmission is tolerated.",
+            "content": "Mira teaches her grandchildren Kaelish words, songs, stories. It's illegal to teach formally, but family transmission is tolerated. Her grandson mispronounces a word; she corrects him gently. This language will die if she doesn't pass it on.",
             "weight": "light",
             "purpose": "Show what's at stake; show the love that drives her; build identification",
             "elements_used": ["protagonist", "stakes"],
@@ -158,7 +158,7 @@
           {
             "id": "act1_memory",
             "name": "The Shrine to Daveth",
-            "content": "Mira tends a small memorial to her brother. Brief flashback to her encouraging him, then news of the massacre.",
+            "content": "Mira tends a small memorial to her brother. Brief flashback: she told him the rebellion would succeed. He believed her. Three weeks later she identified his body by the birthmark on his shoulder—his face was gone.",
             "weight": "medium",
             "purpose": "Establish the trap mechanism; show why patience became her doctrine",
             "elements_used": ["protagonist", "trap_mechanism", "obstacle_internal"]
@@ -166,7 +166,7 @@
           {
             "id": "act1_normal",
             "name": "A Day in the Empire",
-            "content": "Mira navigates daily life—small indignities, speaking Valdren in public, nodding to the governor's portrait. Normal. Survivable.",
+            "content": "Mira navigates daily life. She speaks Valdren in the market; her accent draws a look from a soldier. She nods to the governor's portrait when she passes it. Her grandmother's name for the river is illegal to say aloud. She says it anyway, under her breath. This is surviving.",
             "weight": "light",
             "purpose": "Show the texture of accommodation; not dramatic oppression, just erosion",
             "elements_used": ["protagonist", "antagonist", "trap_mechanism"]
@@ -179,7 +179,7 @@
           {
             "id": "act2_catalyst",
             "name": "The Language Edict",
-            "content": "News arrives: Kaelish banned in all schools. That evening, Mira's grandson comes home crying, hand marked with a cane, for speaking Kaelish at school.",
+            "content": "News arrives: Kaelish banned in all schools. That evening, Mira's grandson comes home crying, hand marked with a cane—three red welts across his palm—for speaking Kaelish at school. He asks her: 'Grandmother, is our language bad?' She cannot answer.",
             "weight": "heavy",
             "purpose": "The catalyst—makes abstract oppression viscerally personal",
             "elements_used": ["catalyst", "protagonist", "stakes"],
@@ -188,23 +188,23 @@
           {
             "id": "act2_denial",
             "name": "The Old Arguments",
-            "content": "Mira argues in council for measured response. Petition the governor. Work within the system. But her arguments feel hollow now.",
+            "content": "Mira argues in council for measured response. Petition the governor. Work within the system. The words taste like ash. She hears herself sounding like Varen. A young councilwoman asks: 'How many generations should we wait?' Mira has no answer.",
             "weight": "medium",
-            "purpose": "Show protagonist trying to maintain old worldview; beginning of internal conflict",
+            "purpose": "Show protagonist trying to maintain old worldview; the cracks are specific",
             "elements_used": ["protagonist", "trap_mechanism", "obstacle_internal"]
           },
           {
             "id": "act2_witness",
             "name": "The Envoy from Thrace",
-            "content": "Tomasz, from a region that seceded 20 years ago, visits on trade. He's not wealthy. His people struggled. But when he speaks his own language in public, he doesn't look over his shoulder.",
+            "content": "Tomasz, from a region that seceded 20 years ago, visits on trade. He's not wealthy. His people struggled—still struggle. His left arm ends at the elbow. But when he speaks his own language in the Kaelish market, he doesn't look over his shoulder. Mira watches him for a long time.",
             "weight": "light",
-            "purpose": "Living proof that leaving is possible; not propaganda, just existence",
+            "purpose": "Living proof that leaving is possible; not propaganda, just existence with its costs visible",
             "elements_used": ["ally_1", "protagonist"]
           },
           {
             "id": "act2_confrontation",
             "name": "The Governor's Offer",
-            "content": "Governor Aldric meets with Mira privately. Offers her a position in the imperial administration. 'You understand that integration is the future. Help your people see it.'",
+            "content": "Governor Aldric meets with Mira privately. He offers her a position in the imperial administration. 'You understand that integration is the future. Help your people see it. You could do so much good.' He means it. That's the worst part.",
             "weight": "medium",
             "purpose": "Antagonist tries co-optation; forces protagonist to see the endgame of accommodation",
             "elements_used": ["antagonist", "protagonist", "difficult_choice"],
@@ -213,7 +213,7 @@
           {
             "id": "act2_crisis",
             "name": "The Question",
-            "content": "Sera asks her mother, after the children are asleep: 'What do you want them to remember about their grandmother? That she kept them safe? Or that she showed them how to live?'",
+            "content": "Sera asks her mother, after the children are asleep: 'What do you want them to remember about their grandmother? That she kept them safe? Or that she showed them how to live?' Mira says nothing. Sera leaves. Mira sits in the dark for three hours.",
             "weight": "medium",
             "purpose": "Ally poses the question that reframes everything",
             "elements_used": ["ally_2", "protagonist", "stakes"]
@@ -221,15 +221,15 @@
           {
             "id": "act2_ghost",
             "name": "Daveth's Letter",
-            "content": "Mira finds an old letter from her brother, written before the rebellion: 'I don't expect to survive. But surviving isn't the same as living.'",
+            "content": "Mira finds an old letter from her brother, written the night before the rebellion: 'I don't expect to survive. But surviving isn't the same as living. You taught me that, Mira.' She had forgotten she ever believed it.",
             "weight": "medium",
-            "purpose": "The dead ally speaks; reframes Mira's understanding of his choice",
+            "purpose": "The dead ally speaks; reframes Mira's understanding of his choice—and her own past self",
             "elements_used": ["trap_mechanism", "obstacle_internal", "protagonist"]
           },
           {
             "id": "act2_preparation",
             "name": "The Declaration is Drafted",
-            "content": "Young council members bring Mira the draft Declaration of Sovereignty. They expect her to argue against it. She reads it silently.",
+            "content": "Young council members bring Mira the draft Declaration of Sovereignty. They expect her to argue against it. She reads it silently. They watch her face. She gives nothing away. 'I will think on it,' she says. They leave disappointed.",
             "weight": "light",
             "purpose": "Setup for climax; show that the choice is coming",
             "elements_used": ["protagonist", "difficult_choice"]
@@ -242,7 +242,7 @@
           {
             "id": "act3_climax",
             "name": "The Vote",
-            "content": "Council chamber. The vote is tied. All eyes on Mira. She stands, looks at the young firebrands, the cautious elders, the portrait of the emperor. She votes yes. The room erupts.",
+            "content": "Council chamber. The vote is tied. All eyes on Mira. Varen is certain she will side with him—she always has. Mira stands, looks at the young firebrands, the cautious elders, the portrait of the emperor on the wall. She votes yes. Varen's face goes white. The young councilwoman weeps. The room erupts. There is no going back.",
             "weight": "heavy",
             "purpose": "The transformation moment; ego consciousness experiences the choice",
             "elements_used": ["protagonist", "difficult_choice", "obstacle_external"]
@@ -250,26 +250,26 @@
           {
             "id": "act3_aftermath",
             "name": "The Response",
-            "content": "Imperial troops mass at the border. Trade routes close. Fear spreads. Some blame Mira. She accepts it.",
+            "content": "Three weeks later. Imperial troops mass at the border—four thousand soldiers. Trade routes close; the price of grain triples. Two Kaelish villages near the border are burned as a warning. Forty-three dead, including six children. Varen calls Mira a murderer in the council chamber. She does not disagree.",
             "weight": "medium",
-            "purpose": "Show that the choice has real costs; not a fairy tale ending",
+            "purpose": "Show that the choice has real, specific costs; not a fairy tale ending",
             "elements_used": ["antagonist", "stakes", "protagonist"]
           },
           {
             "id": "act3_resolution",
             "name": "The First Morning",
-            "content": "Mira teaches her grandson Kaelish in the town square. Legally. For the first time, he doesn't whisper. Neither does she.",
+            "content": "Mira teaches her grandson Kaelish in the town square. Legally. For the first time, he doesn't whisper. Neither does she. Other families gather. An old woman Mira doesn't know touches her arm and says, 'Thank you.' Mira thinks of the six children in the burned villages. She will carry them forever.",
             "weight": "medium",
-            "purpose": "Visual proof of what was won; mirrors Act 1 teaching scene",
+            "purpose": "Visual proof of what was won; mirrors Act 1 teaching scene; holds both victory and cost",
             "elements_used": ["protagonist", "stakes"],
             "echo": "Directly inverts the secret teaching from Act 1"
           },
           {
             "id": "act3_coda",
             "name": "The New Shrine",
-            "content": "Mira places a second item at Daveth's memorial: the draft of the Declaration, with her signature. 'You were right. I just needed forty years to understand.'",
+            "content": "Mira places a second item at Daveth's memorial: the draft of the Declaration, with her signature. She does not speak to him. There is nothing to say that would be true. She was wrong for forty years. She may be wrong now. The dead don't answer, and she has stopped asking for their forgiveness.",
             "weight": "light",
-            "purpose": "Resolution of internal obstacle; peace with the past",
+            "purpose": "Resolution without false closure; she acts, she does not heal",
             "elements_used": ["protagonist", "trap_mechanism", "obstacle_internal"]
           }
         ]
