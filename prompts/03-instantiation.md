@@ -1,238 +1,145 @@
-# Prompt 03: Instantiation — From Abstract Pattern to Concrete Story
+# Prompt 03: Going Deeper — Adding Concrete Nodes
 
 ## Purpose
-Transform the abstract metaphor mapping (which contains NO concrete details) into a specific story world with concrete characters, settings, and situations.
+Add more concrete nodes to the tree, below the pattern-level nodes. This is where abstract patterns become specific characters, settings, and situations.
 
-## The Key Insight
+## The Gradient Continues
 
-The abstract level defines a PATTERN that could generate many stories. Instantiation chooses ONE concrete world to inhabit that pattern.
+```
+[Already built]
+Root: "trapped → free"
+  └── Pattern: "An entity that has accepted bondage"
 
-If the user already gave you concrete details (and you extracted abstractions in step 2), you have two options:
-1. **Use their concrete world**: Map the abstract pattern back to their original ideas
-2. **Propose alternatives**: Show them how the same pattern could become different stories
+[This prompt adds]
+        └── Archetype: "An accommodator in a colonial context"
+              └── Character: "Mira, 58, Kaelish council elder"
+```
 
-Always offer both options. Sometimes seeing alternatives helps users understand what their story is really about.
+Each new level is more concrete than the one above.
+
+## When to Use This
+
+After the pattern-level nodes are established, the user can:
+1. **Go deeper on one branch** — flesh out a specific element
+2. **Explore alternatives** — see different ways to make a pattern concrete
+3. **Add the user's concrete details** — if they provided specific story elements
 
 ## Input Required
-- Confirmed abstract level (with monomyth stages and abstracted elements)
-- Core movement
-- Target effect
-- User's original input (including any concrete details they provided)
-- Any constraints (genre/setting preferences)
+- The current tree (with pattern-level nodes)
+- Which node(s) to expand
+- Any concrete details the user has provided or wants to use
 
 ## Prompt
 
 ```
-The abstract pattern has been confirmed:
-
+Current tree state:
 ---
-{abstract_level_json}
+{current_tree_json}
 ---
 
-Original user input: {raw_input}
-Core Movement: {core_movement}
-Target Audience: {audience}
+User wants to expand: {node_to_expand}
+Concrete details available: {user_provided_details}
 
-## Step 1: Acknowledge the Abstract Pattern
+## Step 1: Identify the Parent Node
 
-Restate the pattern in plain language:
-"This is a story about [abstract protagonist type] who [lives in ordinary world defined by X] until [catalyst type] forces them to [make difficult choice] at the cost of [stakes]."
+The node being expanded:
+- ID: {parent_id}
+- Content: {parent_content}
+- Abstraction level: {parent_level}
 
-## Step 2: Handle User's Concrete Input
+## Step 2: Propose Children
 
-If the user provided concrete details:
-
-"You originally described: [their concrete input]
-
-I can:
-A) Build your story using those elements
-B) Show you 3-4 alternative worlds that express the same pattern
-
-The pattern you've defined could also work as:
-- [Quick 1-sentence alternative 1]
-- [Quick 1-sentence alternative 2]
-- [Quick 1-sentence alternative 3]
-
-Which direction interests you?"
-
-If user chooses their original idea → proceed to full mapping of their world
-If user wants alternatives → proceed to option generation
-
-## Step 3a: Option Generation (if no concrete world chosen)
-
-Generate 3-4 distinct instantiations. Each option MUST:
-- Map EVERY abstract element to a concrete version
-- Map EVERY monomyth stage to a concrete story beat
+Create 3-4 potential child nodes, each more concrete than the parent.
 
 For each option:
 
-### Option [N]: [Evocative Name]
+### Option [N]: [Short Name]
 
-**Setting & Genre**: [Where/when + what type of story]
-**Tone**: [Serious/comic/tragic/hopeful/dark/etc.]
-
-**The Story** (concrete version of the pattern):
-[3-5 sentences that make the abstract pattern specific. Name characters. Name places. Make it feel real.]
-
-**Monomyth Mapping**:
-| Abstract Stage | Concrete Beat |
-|----------------|---------------|
-| Ordinary World: {from abstract} | [Specific scene/situation] |
-| Catalyst: {from abstract} | [Specific event] |
-| [etc for each stage] | |
-
-**Why This Works**:
-- Resonance: Why this world naturally embodies the pattern
-- Audience: How target audience will connect
-- Uniqueness: What this world adds beyond illustration
+**Content**: [More specific version of parent]
+**Why this works**: [How it embodies the parent pattern]
+**Possible children**: [What might come next below this]
 
 ---
 
-After presenting options, ask user to:
-1. Choose one
-2. Request more detail on one
-3. Ask for different options
-4. Specify constraints
+If user provided concrete details that fit this branch, one option should incorporate those details.
 
-## Step 3b: Full Concrete Mapping (after selection)
+## Step 3: After Selection
 
-Once a world is chosen, create the complete mapping:
+Once user chooses an option (or provides their own):
 
+Add the new node to the tree:
 ```json
 {
-  "concrete": {
-    "world": {
-      "setting": "...",
-      "time_period": "...",
-      "genre": "...",
-      "tone": "..."
-    },
-    "monomyth_instantiated": {
-      "ordinary_world": {
-        "abstract": "[from abstract level]",
-        "concrete": "[specific situation/scene]"
-      },
-      "catalyst": {
-        "abstract": "[from abstract level]",
-        "concrete": "[specific event]"
-      },
-      "ordeal": {
-        "abstract": "[from abstract level]",
-        "concrete": "[specific journey/challenges]"
-      },
-      "new_world": {
-        "abstract": "[from abstract level]",
-        "concrete": "[specific transformed state]"
-      }
-      // ... additional stages if included in abstract
-    },
-    "elements_instantiated": {
-      "protagonist": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "name": "...",
-          "role": "...",
-          "background": "...",
-          "the_loop": "What is their daily life before the catalyst?"
-        },
-        "resonance": "Why this concrete version embodies the abstract"
-      },
-      "antagonist": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "name_or_description": "...",
-          "nature": "...",
-          "threat": "How specifically do they threaten the protagonist?"
-        },
-        "resonance": "..."
-      },
-      "trap_mechanism": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "internal": "Specific belief/pattern",
-          "external": "Specific circumstance",
-          "visible_as": "How does the audience SEE this trap?"
-        },
-        "resonance": "..."
-      },
-      "catalyst": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "event": "What specifically happens?",
-          "timing": "Why now?",
-          "irony": "What's ironic about it?"
-        },
-        "resonance": "..."
-      },
-      "difficult_choice": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "the_choice": "Specifically, what must they choose between?",
-          "cost_of_A": "What is lost if they choose A?",
-          "cost_of_B": "What is lost if they choose B?"
-        },
-        "resonance": "..."
-      },
-      "stakes": {
-        "abstract": "[from abstract level]",
-        "concrete": {
-          "if_fail": "Specifically, what happens?",
-          "if_succeed": "Specifically, what is gained?",
-          "shown_through": "How will the audience SEE these stakes?"
-        },
-        "resonance": "..."
-      },
-      "allies": [...],
-      "obstacles": [...]
-    }
-  }
+  "id": "...",
+  "parent_id": "{parent_id}",
+  "name": "...",
+  "content": "...",
+  "abstraction_level": "[archetype/character/setting/scene/beat]",
+  "function": "...",
+  "resonance": "How this connects to parent",
+  "weight": "heavy/medium/light",
+  "children_hint": "What might come next"
 }
 ```
 
-## Guidelines for Good Instantiation
+## Step 4: Check Gradient Integrity
 
-### 1. The World Must EARN the Pattern
-Don't force-fit. If your abstract pattern is about "economic dependence creating bondage," choose a world where economic dependence is natural and visible, not one where you have to contrive it.
+Verify:
+1. New node is MORE CONCRETE than parent
+2. New node is still connected (resonance is clear)
+3. If this node will have children, they can be even more concrete
 
-### 2. Consider Metaphorical Distance
-For difficult topics (abuse, trauma, oppression), sometimes a metaphorical setting allows the audience to engage without defense mechanisms triggering.
-- Direct: Woman leaving abusive husband
-- One step removed: Employee leaving toxic company
-- Metaphorical: Ethnic group seeking independence
+## Offer Next Steps
 
-All can serve the same core movement; choose based on target audience.
-
-### 3. Specificity Creates Reality
-- Not "the protagonist" → "Mira Castellan, 67, silver-haired, still teaches in secret"
-- Not "the oppressive force" → "The Valdren Empire, 300 years of 'benevolent' rule"
-- Not "the catalyst" → "Her grandson Luka is beaten for speaking Kaelish in school"
-
-### 4. Every Element Must Be Showable
-Ask: "How would this appear on screen?" If you can't picture it, it's still too abstract.
-- "Feels trapped" → NOT showable
-- "Watches the border checkpoint every morning from her kitchen window" → Showable
-
-### 5. Avoid Coincidence Stacking
-The antagonist doesn't need to also be the protagonist's secret relative, former lover, and old business partner. One strong connection beats three convenient ones.
-
-## Verification Before Proceeding
-
-1. [ ] Every abstract element has a concrete mapping with explicit resonance
-2. [ ] Every monomyth stage has a concrete beat
-3. [ ] Characters have names
-4. [ ] Settings are specific
-5. [ ] The trap mechanism is VISIBLE (can be shown, not just told)
-6. [ ] The stakes are VISIBLE
-7. [ ] No coincidence stacking (each major connection should be singular and meaningful)
+User can now:
+1. Go deeper on this branch
+2. Go deeper on a different branch
+3. Add parallel siblings (alternative versions at this level)
+4. Stop and view the current tree
+5. Generate a logline from current tree
+6. Render to output format
 ```
 
-## Expected Output
+## Example: Expanding a Protagonist Pattern
 
-Either:
-- 3-4 instantiation options with full monomyth mappings
-- Full concrete mapping JSON
+**Parent node**:
+```json
+{
+  "id": "protagonist_pattern",
+  "content": "An expert whose skills are underutilized in legitimate life",
+  "abstraction_level": "pattern"
+}
+```
 
-Followed by confirmation request.
+**Proposed children**:
 
-## Next Step
-Once confirmed, proceed to `04-structure.md` to build the three-act structure from this concrete world.
+### Option 1: Academic Expert
+Content: "A scholar or scientist working in a field that doesn't value their specific expertise"
+Why: The gap between capability and recognition is institutionally enforced
+Possible children: Chemistry teacher, historian at a mediocre college, researcher denied funding
+
+### Option 2: Craftsperson Expert
+Content: "An artisan or tradesperson whose mastery goes unrecognized in their market"
+Why: The gap is economic—their skills exceed what people will pay for
+Possible children: Master chef at a chain restaurant, furniture maker competing with IKEA
+
+### Option 3: Service Expert
+Content: "A professional in a helping field whose true capabilities are constrained by the system"
+Why: Institutional rules prevent them from doing what they know they could do
+Possible children: Doctor in a bureaucratic hospital, social worker with crushing caseload
+
+### Option 4: [User's Detail]
+If user said "chemistry teacher":
+Content: "A chemistry teacher whose understanding far exceeds what high school curricula require"
+Why: Directly uses user's input while connecting to pattern
+
+---
+
+User selects → new node added → tree grows deeper.
+
+## Notes
+
+- Don't rush to the bottom
+- User may want to explore multiple branches in parallel
+- Some branches may stay abstract while others go deep
+- The tree is flexible—not every branch needs the same depth

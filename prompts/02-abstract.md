@@ -1,233 +1,147 @@
-# Prompt 02: Abstract Level — Extracting the Universal Pattern
+# Prompt 02: Building the Upper Tree — Abstract Nodes
 
 ## Purpose
-Extract the universal, abstract pattern from whatever the user provides—whether it's a theme, a concrete story idea, or something in between. This level must be FREE of any concrete details.
+Build the most abstract levels of the metaphor tree, just below the root. These nodes define patterns and archetypes, not specific instances.
 
-## The Problem This Solves
+## The Gradient Principle
 
-Users often provide input at the wrong level:
-- "A chemistry teacher cooks meth" — This is CONCRETE
-- "A person with hidden capability finally deploys it" — This is ABSTRACT
-- "Someone trades one form of death for another" — This is ABSTRACT
+The metaphor tree is a gradient from abstract (root) to concrete (leaves):
 
-If the user gives concrete input, you must extract UPWARD to the abstract level. Do not simply rephrase their concrete idea as the "abstract" version.
+```
+Root: Core Movement ("trapped → free")
+  │
+  ├── [LEVEL 1] Pattern: "An entity that has accepted bondage"
+  │     └── [LEVEL 2] Archetype: "An accommodator in a colonial context"
+  │           └── [LEVEL 3] Character: "Mira, 58, council elder"
+  │                 └── [LEVEL 4] Scene: "Council meeting on taxes"
+  │                       └── [LEVEL 5] Beat: "Varen thanks her; she feels sick"
+```
 
-## The Abstraction Test
+**This prompt handles LEVEL 1 and potentially LEVEL 2**—the most abstract nodes below the root.
 
-For every element you define, ask: "Could this describe a DIFFERENT story?"
+## The Concreteness Test
 
-- "A high school chemistry teacher" — FAILS (too specific)
-- "An expert whose skills are undervalued" — PASSES (could be many stories)
-- "Jesse Pinkman" — FAILS (specific character)
-- "A younger person who represents squandered potential" — PASSES
+For each node, ask: "Is this a pattern/category, or a specific instance?"
 
-If your "abstract" level couldn't describe at least 10 different possible concrete stories, it's not abstract enough.
+- "An expert whose skills are underutilized" → PATTERN (good for upper levels)
+- "A chemistry teacher" → SPECIFIC INSTANCE (too concrete for upper levels)
+- "Someone bound by guilt over past failure" → PATTERN
+- "Mira, who encouraged her brother to join the rebellion" → SPECIFIC
+
+If user provides concrete details, those belong LOWER in the tree, not here.
 
 ## Input Required
-- Core movement statement (from intake)
-- Target effect (audience, current belief, desired belief)
-- Any constraints
-- User's raw input (which may be concrete, abstract, or mixed)
+- Core movement statement (the root)
+- Target effect (optional but helpful)
+- User's raw input (may contain concrete details—note them but don't use them yet)
 
 ## Prompt
 
 ```
-You are building a METAPHOR TREE. The abstract level defines the universal pattern that will later be instantiated into a specific story.
-
-CRITICAL: If the user provided concrete story elements (specific characters, settings, occupations, situations), you must EXTRACT the abstract pattern from them. Do not use their concrete details at this level.
+You are building the upper levels of a metaphor tree. The root (core movement) is established. Now create the first children.
 
 ---
-Core Movement: {core_movement}
+Root: {core_movement}
 
-Target Effect:
+Target Effect (if provided):
 - Audience: {audience}
 - Current Belief: {current_belief}
 - Desired Belief: {desired_belief}
 
-Constraints: {constraints}
-
-User's Input: {raw_input}
+User's Raw Input: {raw_input}
 ---
 
-## Step 1: Identify Concrete vs Abstract
+## Step 1: Note Concrete Details (Don't Use Yet)
 
-First, list any CONCRETE elements the user provided:
-- Specific occupations (teacher, lawyer, chef)
-- Specific settings (high school, hospital, New Mexico)
-- Specific characters or names
-- Specific situations (cooking meth, fighting cancer)
+If the user provided concrete story elements, list them:
+- Specific occupations, settings, characters, situations
+- These will be used LATER, lower in the tree
+- For now, we're working at the pattern level
 
-Then, for EACH concrete element, extract its abstract essence:
-- "Chemistry teacher" → "Expert with undervalued/hidden capabilities"
-- "Terminal cancer" → "External deadline that reframes all priorities"
-- "Cooking meth" → "Deploying forbidden skills for survival"
-- "Jesse" → "Unlikely ally from a world the protagonist despises"
+## Step 2: Define Pattern-Level Nodes
 
-## Step 2: Define the Monomyth Slots
+Create the first children of the root. These should be patterns/archetypes that could apply to many different specific stories.
 
-Before filling in characters, define which monomyth stages this story requires:
+For each major story element, create a node:
 
-### Required Stages (always present):
-- Ordinary World: What is the protagonist's loop? What keeps them stable but stuck?
-- Catalyst: What exception breaks the loop?
-- Ordeal: What transformation must they undergo?
-- New World: What does "transformed" look like?
+### Protagonist Pattern
+- **Content**: What TYPE of entity embodies the "before" state?
+- **Function**: How does this pattern serve the core movement?
+- **Children hint**: What more specific versions might this become?
 
-### Optional Stages (include only if needed for THIS story):
-- Refusal of the Call
-- Meeting the Mentor
-- Crossing the Threshold
-- Tests, Allies, Enemies
-- The Abyss/Crisis
-- Resurrection/Final Test
-- Return with the Elixir
+### Opposing Force Pattern
+- **Content**: What TYPE of force maintains the status quo?
+- **Function**: How does this pattern embody resistance to the transformation?
+- **Children hint**: Could be a person, institution, internal voice, cosmic force...
 
-For each stage you include, describe it ABSTRACTLY:
-- Not "Walter gets cancer diagnosis" but "Protagonist receives news that their ordinary world cannot continue"
-- Not "Walter meets Tuco" but "Protagonist encounters someone who embodies the new world's dangers"
+### Trap Pattern
+- **Content**: What CATEGORY of mechanism keeps the protagonist bound?
+- **Function**: Why hasn't transformation already happened?
+- **Children hint**: Internal beliefs? External circumstances? Both?
 
-## Step 3: Define Abstract Elements
+### Catalyst Pattern
+- **Content**: What KIND of event breaks equilibrium?
+- **Function**: Why does this type of event trigger change?
+- **Children hint**: What specific forms might this take?
 
-Now fill in the abstract metaphor mapping. Every description must pass the "could this be 10 different stories" test.
+### Stakes Pattern (if clear from core movement)
+- **Content**: What's at risk in abstract terms?
+- **Function**: What categories of loss/gain?
 
-### Protagonist (ABSTRACT)
-- **Type**: What category of person? (Not occupation—their essential nature)
-- **Core Trait**: What defines them before transformation?
-- **Trap**: What keeps them in their ordinary world?
-- **Potential**: What latent capability will be revealed?
+## Step 3: Check Gradient Integrity
 
-### Antagonist / Opposing Force (ABSTRACT)
-- **Type**: What category of force opposes the protagonist?
-- **Nature**: Is it a person? An institution? An internal conflict? A cosmic force?
-- **Function**: How does it maintain the status quo?
+For each node you created, verify:
+1. It's more concrete than the root (the core movement)
+2. It's still abstract enough to describe 5+ different specific stories
+3. It has clear resonance with the root
 
-### The Trap Mechanism (ABSTRACT)
-- **Internal**: What belief or pattern keeps the protagonist bound?
-- **External**: What circumstances reinforce the trap?
-- **Why Valid**: Why hasn't the protagonist already escaped? (This must feel earned)
+## Step 4: Identify Monomyth Roles (Optional)
 
-### The Catalyst (ABSTRACT)
-- **Type**: What category of event breaks equilibrium?
-- **Function**: Why does THIS break the loop when other things haven't?
-- **Irony**: What's ironic about this catalyst? (The best catalysts contain irony)
+If certain Hero's Journey beats are clearly implied, note them:
+- Which node serves as "Ordinary World"?
+- Which serves as "Catalyst"?
+- Which serves as "Ordeal"?
 
-### The Difficult Choice (ABSTRACT)
-- **Nature**: What must be chosen between?
-- **Cost**: What is lost either way?
-- **Transformation**: How does making this choice change the protagonist?
-
-### Stakes (ABSTRACT)
-- **If they fail**: What is lost? (Be abstract but SPECIFIC—not "everything" but what category of loss)
-- **If they succeed**: What is gained? (Again, specific category)
+But don't force it—some stories don't fit the monomyth neatly.
 
 ## Output Format
 
 ```json
 {
-  "abstraction_check": {
-    "concrete_elements_received": ["list what user provided that was concrete"],
-    "abstractions_extracted": {
-      "element": "abstract version"
-    }
+  "root": {
+    "core_movement": "...",
+    "target_effect": {...}  // if provided
   },
-  "monomyth_stages": {
-    "ordinary_world": "abstract description",
-    "catalyst": "abstract description",
-    "ordeal": "abstract description",
-    "new_world": "abstract description",
-    // ... other stages if needed
-  },
-  "abstract": {
-    "protagonist": {
-      "type": "...",
-      "core_trait": "...",
-      "trap": "...",
-      "potential": "..."
-    },
-    "antagonist": {
-      "type": "...",
-      "nature": "...",
-      "function": "..."
-    },
-    "trap_mechanism": {
-      "internal": "...",
-      "external": "...",
-      "why_valid": "..."
-    },
-    "catalyst": {
-      "type": "...",
+  "nodes": [
+    {
+      "id": "protagonist_pattern",
+      "parent_id": null,
+      "name": "Protagonist Pattern",
+      "content": "...",
+      "abstraction_level": "pattern",
       "function": "...",
-      "irony": "..."
+      "children_hint": "...",
+      "monomyth_role": "..." // optional
     },
-    "difficult_choice": {
-      "nature": "...",
-      "cost": "...",
-      "transformation": "..."
-    },
-    "stakes": {
-      "if_fail": "...",
-      "if_succeed": "..."
-    }
-  }
+    // ... more nodes
+  ],
+  "concrete_details_noted": [
+    // List any concrete details from user input that will be used lower in tree
+  ]
 }
 ```
-
-## Verification Before Proceeding
-
-Before presenting to user, verify:
-1. [ ] No concrete details in abstract level (names, places, occupations)
-2. [ ] Each element could describe 10+ different stories
-3. [ ] Monomyth stages are defined abstractly
-4. [ ] The trap mechanism explains why protagonist hasn't already changed
-5. [ ] The catalyst has inherent irony
-6. [ ] Stakes are specific categories, not vague ("death" is too vague; "social death" or "physical death" is better)
-
-If any check fails, revise before presenting.
-```
-
-## Example: Breaking Bad Extracted to Abstract
-
-If user input: "A chemistry teacher gets cancer and decides to cook meth"
-
-**Concrete elements received:**
-- Chemistry teacher (occupation)
-- Cancer (specific disease)
-- Cook meth (specific criminal activity)
-
-**Abstractions extracted:**
-- Chemistry teacher → Expert whose skills are underutilized in legitimate life
-- Cancer → External force that eliminates the future the protagonist counted on
-- Cook meth → Deploying forbidden expertise for survival/provision
-
-**Abstract level output:**
-```json
-{
-  "protagonist": {
-    "type": "Underutilized expert",
-    "core_trait": "Capability suppressed by respectability",
-    "trap": "Identity as provider requires playing by rules that don't reward their excellence",
-    "potential": "Mastery that could dominate an unregulated domain"
-  },
-  "antagonist": {
-    "type": "The constraints of legitimate success",
-    "nature": "Systemic/societal + internal (their own morality)",
-    "function": "Keeps the expert small by punishing deviation"
-  },
-  "catalyst": {
-    "type": "Elimination of the future",
-    "function": "Long-term thinking no longer matters; the ordinary world's rules become irrelevant",
-    "irony": "The thing that kills them is what sets them free"
-  }
-}
-```
-
-This abstract level could generate:
-- A chemistry teacher cooking meth (Breaking Bad)
-- An accountant running a fraud scheme after a terminal diagnosis
-- A weapons engineer selling secrets after learning their family is hostage
-- A chef poisoning for hire after bankruptcy
-
-The abstract level is the PATTERN. Concrete comes later.
 
 ## Next Step
-Once user confirms the abstract mapping, proceed to `03-instantiation.md` where this pattern becomes a specific world.
+
+Present these pattern-level nodes to user. They can:
+1. Approve and go deeper (add more specific nodes)
+2. Modify the patterns
+3. Provide concrete details to instantiate at a lower level
+```
+
+## Notes
+
+- Don't try to build the whole tree at once
+- The user may want to explore options at each level
+- Some branches may go deeper than others
+- The monomyth is a guide, not a requirement

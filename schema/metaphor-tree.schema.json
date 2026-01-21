@@ -1,546 +1,105 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Metaphor Tree",
-  "description": "A hierarchical structure representing a story as interconnected metaphors",
+  "description": "A hierarchical structure representing a story as interconnected metaphors. The tree is a gradient from abstract (root) to concrete (leaves). Schema is flexible—not all fields are required for every story.",
   "type": "object",
-  "required": ["core_movement", "target_effect", "levels"],
+  "required": ["root"],
   "properties": {
-    "core_movement": {
-      "type": "string",
-      "description": "The fundamental emotional/thematic transformation the story enacts"
-    },
-    "target_effect": {
+    "root": {
       "type": "object",
-      "description": "What change we want in the audience",
+      "description": "The most abstract node—the core movement/transformation",
       "properties": {
-        "audience": {
+        "core_movement": {
           "type": "string",
-          "description": "Who is this story for"
+          "description": "The fundamental emotional/thematic transformation (e.g., 'trapped → free', 'innocent → corrupted')"
         },
-        "current_belief": {
-          "type": "string",
-          "description": "What the audience currently believes or feels"
-        },
-        "desired_belief": {
-          "type": "string",
-          "description": "What we want them to believe or feel after"
+        "target_effect": {
+          "type": "object",
+          "description": "What change we want in the audience (optional but recommended)",
+          "properties": {
+            "audience": { "type": "string" },
+            "current_belief": { "type": "string" },
+            "desired_belief": { "type": "string" }
+          }
         }
       },
-      "required": ["audience", "current_belief", "desired_belief"]
+      "required": ["core_movement"]
     },
-    "user_input": {
-      "type": "object",
-      "description": "Record of what the user originally provided",
-      "properties": {
-        "raw_input": {
-          "type": "string",
-          "description": "The user's original story concept/idea"
-        },
-        "concrete_elements_received": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Concrete elements identified in user input"
-        },
-        "constraints": {
-          "type": "string",
-          "description": "Any constraints specified (genre, tone, format)"
-        }
+    "nodes": {
+      "type": "array",
+      "description": "All nodes in the tree, each referencing its parent. First level below root is most abstract; deepest levels are most concrete (scenes).",
+      "items": {
+        "$ref": "#/definitions/node"
       }
-    },
-    "levels": {
-      "type": "object",
-      "properties": {
-        "abstract": {
-          "$ref": "#/definitions/abstract_level"
-        },
-        "concrete": {
-          "$ref": "#/definitions/concrete_level"
-        },
-        "structure": {
-          "$ref": "#/definitions/structure_level"
-        },
-        "scenes": {
-          "$ref": "#/definitions/scene_level"
-        }
-      },
-      "required": ["abstract", "concrete", "structure"]
     },
     "metadata": {
       "type": "object",
       "properties": {
-        "created": { "type": "string", "format": "date-time" },
-        "last_modified": { "type": "string", "format": "date-time" },
-        "current_stage": { "type": "string" },
-        "render_format": { "type": "string" }
+        "created": { "type": "string" },
+        "last_modified": { "type": "string" },
+        "depth": {
+          "type": "integer",
+          "description": "How many levels deep the tree goes"
+        },
+        "user_input": {
+          "type": "string",
+          "description": "What the user originally provided"
+        }
       }
     }
   },
   "definitions": {
-    "weight": {
-      "type": "string",
-      "enum": ["heavy", "medium", "light"],
-      "description": "Metaphorical weight - how central this element is to the theme"
-    },
-    "abstract_level": {
+    "node": {
       "type": "object",
-      "description": "Level 1: Abstract metaphor mappings - NO concrete details allowed",
+      "description": "A node in the metaphor tree. More abstract near root, more concrete toward leaves.",
       "properties": {
-        "abstraction_check": {
-          "type": "object",
-          "description": "Record of extraction from concrete to abstract",
-          "properties": {
-            "concrete_elements_received": {
-              "type": "array",
-              "items": { "type": "string" },
-              "description": "What concrete elements did the user provide"
-            },
-            "abstractions_extracted": {
-              "type": "object",
-              "additionalProperties": { "type": "string" },
-              "description": "Mapping of concrete -> abstract for each element"
-            }
-          }
-        },
-        "monomyth_stages": {
-          "type": "object",
-          "description": "The Hero's Journey stages required for this story (described abstractly)",
-          "properties": {
-            "ordinary_world": {
-              "type": "string",
-              "description": "Abstract description of the protagonist's loop before disruption"
-            },
-            "catalyst": {
-              "type": "string",
-              "description": "Abstract description of what breaks the loop"
-            },
-            "refusal": {
-              "type": "string",
-              "description": "Abstract description of resistance to change (optional)"
-            },
-            "crossing_threshold": {
-              "type": "string",
-              "description": "Abstract description of commitment point (optional)"
-            },
-            "tests_allies_enemies": {
-              "type": "string",
-              "description": "Abstract description of ordeal challenges (optional)"
-            },
-            "abyss": {
-              "type": "string",
-              "description": "Abstract description of the crisis/lowest point (optional)"
-            },
-            "ordeal": {
-              "type": "string",
-              "description": "Abstract description of the transformation journey"
-            },
-            "new_world": {
-              "type": "string",
-              "description": "Abstract description of the transformed state"
-            }
-          },
-          "required": ["ordinary_world", "catalyst", "ordeal", "new_world"]
-        },
-        "protagonist": {
-          "$ref": "#/definitions/abstract_protagonist"
-        },
-        "antagonist": {
-          "$ref": "#/definitions/abstract_antagonist"
-        },
-        "trap_mechanism": {
-          "$ref": "#/definitions/abstract_trap"
-        },
-        "catalyst": {
-          "$ref": "#/definitions/abstract_catalyst"
-        },
-        "difficult_choice": {
-          "$ref": "#/definitions/abstract_choice"
-        },
-        "stakes": {
-          "$ref": "#/definitions/abstract_stakes"
-        },
-        "allies": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/abstract_node" }
-        },
-        "obstacles": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/abstract_node" }
-        }
-      },
-      "required": ["monomyth_stages", "protagonist", "antagonist", "trap_mechanism", "catalyst", "difficult_choice", "stakes"]
-    },
-    "abstract_protagonist": {
-      "type": "object",
-      "properties": {
-        "type": {
+        "id": {
           "type": "string",
-          "description": "Category of person (NOT occupation) - must pass '10 stories' test"
+          "description": "Unique identifier"
         },
-        "core_trait": {
-          "type": "string",
-          "description": "What defines them before transformation"
+        "parent_id": {
+          "type": ["string", "null"],
+          "description": "ID of parent node (null for nodes directly under root)"
         },
-        "trap": {
+        "name": {
           "type": "string",
-          "description": "What keeps them in their ordinary world"
+          "description": "Short name for this node"
         },
-        "potential": {
+        "content": {
           "type": "string",
-          "description": "What latent capability will be revealed"
-        }
-      },
-      "required": ["type", "core_trait", "trap", "potential"]
-    },
-    "abstract_antagonist": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Category of force that opposes"
+          "description": "What this node represents—description scales with concreteness"
         },
-        "nature": {
+        "abstraction_level": {
           "type": "string",
-          "description": "Person/institution/internal/cosmic"
-        },
-        "function": {
-          "type": "string",
-          "description": "How it maintains the status quo"
-        }
-      },
-      "required": ["type", "nature", "function"]
-    },
-    "abstract_trap": {
-      "type": "object",
-      "properties": {
-        "internal": {
-          "type": "string",
-          "description": "What belief/pattern keeps them bound"
-        },
-        "external": {
-          "type": "string",
-          "description": "What circumstances reinforce the trap"
-        },
-        "why_valid": {
-          "type": "string",
-          "description": "Why the protagonist hasn't already escaped"
-        }
-      },
-      "required": ["internal", "external", "why_valid"]
-    },
-    "abstract_catalyst": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Category of event that breaks equilibrium"
-        },
-        "function": {
-          "type": "string",
-          "description": "Why THIS breaks the loop when other things haven't"
-        },
-        "irony": {
-          "type": "string",
-          "description": "What's ironic about this catalyst"
-        }
-      },
-      "required": ["type", "function"]
-    },
-    "abstract_choice": {
-      "type": "object",
-      "properties": {
-        "nature": {
-          "type": "string",
-          "description": "What must be chosen between"
-        },
-        "cost": {
-          "type": "string",
-          "description": "What is lost either way"
-        },
-        "transformation": {
-          "type": "string",
-          "description": "How making this choice changes the protagonist"
-        }
-      },
-      "required": ["nature", "cost", "transformation"]
-    },
-    "abstract_stakes": {
-      "type": "object",
-      "properties": {
-        "if_fail": {
-          "type": "string",
-          "description": "Specific category of loss (not 'everything')"
-        },
-        "if_succeed": {
-          "type": "string",
-          "description": "Specific category of gain"
-        }
-      },
-      "required": ["if_fail", "if_succeed"]
-    },
-    "abstract_node": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "What this element represents abstractly"
+          "description": "Where on the gradient this sits (e.g., 'pattern', 'archetype', 'character', 'scene', 'beat')"
         },
         "weight": {
-          "$ref": "#/definitions/weight"
+          "type": "string",
+          "enum": ["heavy", "medium", "light"],
+          "description": "Metaphorical weight—how central to the theme"
         },
         "function": {
           "type": "string",
-          "description": "What role this plays in the core movement"
-        }
-      },
-      "required": ["description"]
-    },
-    "concrete_level": {
-      "type": "object",
-      "description": "Level 2: Concrete instantiation - every abstract element mapped to specific world",
-      "properties": {
-        "world": {
-          "type": "object",
-          "properties": {
-            "setting": { "type": "string" },
-            "time_period": { "type": "string" },
-            "genre": { "type": "string" },
-            "tone": { "type": "string" }
-          },
-          "required": ["setting", "genre", "tone"]
+          "description": "What role this plays in the story/core movement"
         },
-        "monomyth_instantiated": {
-          "type": "object",
-          "description": "Each abstract monomyth stage mapped to concrete story beats",
-          "additionalProperties": {
-            "$ref": "#/definitions/instantiated_stage"
-          }
-        },
-        "elements_instantiated": {
-          "type": "object",
-          "description": "Each abstract element mapped to concrete form",
-          "properties": {
-            "protagonist": { "$ref": "#/definitions/concrete_protagonist" },
-            "antagonist": { "$ref": "#/definitions/concrete_antagonist" },
-            "trap_mechanism": { "$ref": "#/definitions/concrete_trap" },
-            "catalyst": { "$ref": "#/definitions/concrete_catalyst" },
-            "difficult_choice": { "$ref": "#/definitions/concrete_choice" },
-            "stakes": { "$ref": "#/definitions/concrete_stakes" },
-            "allies": {
-              "type": "array",
-              "items": { "$ref": "#/definitions/concrete_mapping" }
-            },
-            "obstacles": {
-              "type": "array",
-              "items": { "$ref": "#/definitions/concrete_mapping" }
-            }
-          },
-          "required": ["protagonist", "antagonist", "trap_mechanism", "catalyst", "difficult_choice", "stakes"]
-        }
-      },
-      "required": ["world", "monomyth_instantiated", "elements_instantiated"]
-    },
-    "instantiated_stage": {
-      "type": "object",
-      "properties": {
-        "abstract": {
+        "resonance": {
           "type": "string",
-          "description": "The abstract description from level 1"
+          "description": "How this connects to its parent—why this concrete choice embodies the abstract"
         },
-        "concrete": {
+        "monomyth_role": {
           "type": "string",
-          "description": "The specific situation/scene in this world"
-        }
-      },
-      "required": ["abstract", "concrete"]
-    },
-    "concrete_protagonist": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string", "description": "Reference to abstract version" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "name": { "type": "string" },
-            "role": { "type": "string" },
-            "background": { "type": "string" },
-            "the_loop": { "type": "string", "description": "Their daily life before the catalyst" }
-          },
-          "required": ["name", "role", "the_loop"]
-        },
-        "resonance": { "type": "string", "description": "Why this concrete version embodies the abstract" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_antagonist": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "name_or_description": { "type": "string" },
-            "nature": { "type": "string" },
-            "threat": { "type": "string", "description": "How specifically they threaten the protagonist" }
-          },
-          "required": ["name_or_description", "threat"]
-        },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_trap": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "internal": { "type": "string" },
-            "external": { "type": "string" },
-            "visible_as": { "type": "string", "description": "How the audience SEES this trap" }
-          },
-          "required": ["internal", "external", "visible_as"]
-        },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_catalyst": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "event": { "type": "string", "description": "What specifically happens" },
-            "timing": { "type": "string", "description": "Why now" },
-            "irony": { "type": "string" }
-          },
-          "required": ["event"]
-        },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_choice": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "the_choice": { "type": "string", "description": "What they must choose between" },
-            "cost_of_A": { "type": "string" },
-            "cost_of_B": { "type": "string" }
-          },
-          "required": ["the_choice", "cost_of_A", "cost_of_B"]
-        },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_stakes": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": {
-          "type": "object",
-          "properties": {
-            "if_fail": { "type": "string" },
-            "if_succeed": { "type": "string" },
-            "shown_through": { "type": "string", "description": "How the audience SEES these stakes" }
-          },
-          "required": ["if_fail", "if_succeed", "shown_through"]
-        },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "concrete_mapping": {
-      "type": "object",
-      "properties": {
-        "abstract": { "type": "string" },
-        "concrete": { "type": "string" },
-        "details": { "type": "string" },
-        "weight": { "$ref": "#/definitions/weight" },
-        "resonance": { "type": "string" }
-      },
-      "required": ["abstract", "concrete", "resonance"]
-    },
-    "structure_level": {
-      "type": "object",
-      "description": "Level 3: Three-act story structure with weighted nodes",
-      "properties": {
-        "act_1_ordinary_world": { "$ref": "#/definitions/act" },
-        "act_2_ordeal": { "$ref": "#/definitions/act" },
-        "act_3_new_world": { "$ref": "#/definitions/act" }
-      },
-      "required": ["act_1_ordinary_world", "act_2_ordeal", "act_3_new_world"]
-    },
-    "act": {
-      "type": "object",
-      "properties": {
-        "purpose": {
-          "type": "string",
-          "description": "What this act accomplishes for the ego consciousness journey"
-        },
-        "nodes": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/structure_node" }
-        }
-      },
-      "required": ["purpose", "nodes"]
-    },
-    "structure_node": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "monomyth_stage": {
-          "type": "string",
-          "description": "Which monomyth stage this node serves"
-        },
-        "content": { "type": "string", "description": "What happens in this beat" },
-        "weight": { "$ref": "#/definitions/weight" },
-        "purpose": { "type": "string", "description": "What this beat accomplishes thematically" },
-        "elements_used": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Which concrete elements appear in this beat"
+          "description": "Optional: which Hero's Journey beat this serves (ordinary_world, catalyst, ordeal, etc.)"
         },
         "echo": {
           "type": "string",
-          "description": "How this beat echoes or foreshadows other parts"
+          "description": "How this echoes or foreshadows other parts of the story"
+        },
+        "children_hint": {
+          "type": "string",
+          "description": "Guidance for what kind of children this node might have"
         }
       },
-      "required": ["id", "name", "content", "weight"]
-    },
-    "scene_level": {
-      "type": "array",
-      "description": "Level 4 (optional): Leaf nodes - actual scenes",
-      "items": { "$ref": "#/definitions/scene_node" }
-    },
-    "scene_node": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "parent_structure_node": { "type": "string" },
-        "location": { "type": "string" },
-        "characters_present": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "action": { "type": "string" },
-        "dialogue_notes": { "type": "string" },
-        "visual_elements": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Important visual details (each is a metaphor)"
-        },
-        "weight": { "$ref": "#/definitions/weight" },
-        "metaphor_function": { "type": "string" }
-      },
-      "required": ["id", "parent_structure_node", "action", "weight"]
+      "required": ["id", "name", "content"]
     }
   }
 }
