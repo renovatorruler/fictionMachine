@@ -115,6 +115,39 @@ Before finalizing, verify:
 - [ ] Each node serves a clear purpose (no filler)
 - [ ] The transformation feels earned, not rushed
 
+## Passivity Check (CRITICAL)
+
+Scan every node for passive writing. Red flags:
+
+**Hedged language:**
+- "begins to understand" → What do they now believe?
+- "starts to question" → What specifically do they doubt?
+- "challenges ahead" → What specific consequences?
+- "comes to terms with" → What did they accept? What did it cost?
+
+**Both-sides framing:**
+- "realizes both sides have a point" → NO. Characters have positions.
+- "learns to see the antagonist's perspective" → Only if it doesn't soften the antagonist's wrongness
+- "finds a middle ground" → Rarely. Transformation usually means committing, not compromising.
+
+**Vague consequences:**
+- "faces difficulties" → Who dies? What's lost? What breaks?
+- "the cost was high" → Name the cost. Bodies, relationships, years, limbs.
+- "things would never be the same" → How specifically?
+
+**Unearned resolution:**
+- "they finally understood each other" → Did the antagonist actually change, or did we just paper over the conflict?
+- "peace was restored" → At what price? Who paid it?
+- "she found closure" → Closure is often a lie. What does she actually feel?
+
+For each node, ask:
+1. Does this commit to something?
+2. Would anyone disagree with how this is framed?
+3. Are the consequences specific?
+4. Does the character have a position (not ambivalence)?
+
+If any node fails, rewrite it before presenting.
+
 After outputting the structure, present it to the user for review. They may want to:
 - Adjust specific nodes
 - Add or remove beats
