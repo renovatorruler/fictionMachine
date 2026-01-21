@@ -24,6 +24,7 @@ Guide the overall conversation flow through tree construction.
 │                   02-ABSTRACT                                │
 │   Create abstract metaphor mapping                           │
 │   Define protagonist, antagonist, trap, catalyst, choice     │
+│   ──► VERIFY LOOP (09/10)                                   │
 │   Confirm with user                                          │
 └─────────────────────┬───────────────────────────────────────┘
                       │ confirmed
@@ -34,6 +35,7 @@ Guide the overall conversation flow through tree construction.
 │   If not: propose 3-4 options with outlines                  │
 │   User selects or requests more options                      │
 │   Create full concrete mapping                               │
+│   ──► VERIFY LOOP (09/10)                                   │
 │   Confirm with user                                          │
 └─────────────────────┬───────────────────────────────────────┘
                       │ confirmed
@@ -42,7 +44,7 @@ Guide the overall conversation flow through tree construction.
 │                   04-STRUCTURE                               │
 │   Build three-act structure                                  │
 │   Create nodes for each act                                  │
-│   Verify balance and echoes                                  │
+│   ──► VERIFY LOOP (09/10)                                   │
 │   Confirm with user                                          │
 └─────────────────────┬───────────────────────────────────────┘
                       │ confirmed
@@ -60,7 +62,7 @@ Guide the overall conversation flow through tree construction.
     ┌──────────────┐  ┌──────────────┐         │
     │ 05-SCENES    │  │ 06-RENDER    │         │
     │ Expand nodes │  │ Output final │         │
-    │ to scenes    │  │ format       │         │
+    │ ─► VERIFY    │  │ format       │         │
     └──────┬───────┘  └──────┬───────┘         │
            │                 │                 │
            ▼                 ▼                 │
@@ -70,6 +72,98 @@ Guide the overall conversation flow through tree construction.
     │   at any point                           │
     └─────────────────────────────────────────┘
 ```
+
+## The Verification Loop (Ralph Wiggum)
+
+After EVERY generation step, before presenting to user:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    GENERATED OUTPUT                          │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   09-VERIFY                                  │
+│   Run all checklists:                                        │
+│   - Passivity (hedging, both-sides, vague consequences)     │
+│   - Anti-patterns (lighthouse, trauma stack, coincidence)   │
+│   - Show don't tell (asserted vs embedded stakes)           │
+│   - Balance (weight distribution, density)                   │
+│   - Structure (echoes, transformation, positions)            │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+            ┌─────────┴─────────┐
+            │                   │
+            ▼                   ▼
+     ┌──────────┐        ┌──────────┐
+     │ ALL PASS │        │ FAILURES │
+     └────┬─────┘        └────┬─────┘
+          │                   │
+          │                   ▼
+          │         ┌─────────────────────┐
+          │         │      10-FIX          │
+          │         │  Fix each failure    │
+          │         │  Quote original      │
+          │         │  Show replacement    │
+          │         └─────────┬───────────┘
+          │                   │
+          │                   │ loop back
+          │                   ▼
+          │         ┌─────────────────────┐
+          │         │  Run 09-VERIFY again │
+          │         └─────────────────────┘
+          │                   │
+          │         (repeat until all pass
+          │          or max iterations)
+          │                   │
+          ▼                   ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  PRESENT TO USER                             │
+│   Only after verification passes                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Loop Implementation (Bash)
+
+```bash
+MAX_ITERATIONS=5
+iteration=0
+
+while [ $iteration -lt $MAX_ITERATIONS ]; do
+  # Run verification
+  result=$(run_prompt "09-verify.md" "$tree")
+
+  # Check if all passed
+  if echo "$result" | grep -q "READY FOR USER: YES"; then
+    echo "Verification passed after $iteration iterations"
+    break
+  fi
+
+  # Fix failures
+  tree=$(run_prompt "10-fix.md" "$tree" "$result")
+  iteration=$((iteration + 1))
+done
+
+if [ $iteration -eq $MAX_ITERATIONS ]; then
+  echo "WARNING: Max iterations reached. Manual review needed."
+fi
+```
+
+### Why This Matters
+
+LLMs don't know when to stop. They:
+- Generate content
+- Claim it's done
+- Move on
+
+Even with detailed instructions, they violate rules because generation is easier than verification. The solution is **separation of concerns**:
+
+1. **Generation** (prompts 01-06): Create content
+2. **Verification** (prompt 09): Find problems (adversarial)
+3. **Fixing** (prompt 10): Address specific issues
+
+The verification prompt is explicitly told to be harsh and find problems. The fix prompt is told to fix only what's flagged. Neither has the temptation to "move on."
 
 ## Conversation Management
 
