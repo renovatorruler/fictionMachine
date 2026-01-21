@@ -1,0 +1,286 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Metaphor Tree",
+  "description": "A hierarchical structure representing a story as interconnected metaphors",
+  "type": "object",
+  "required": ["core_movement", "target_effect", "levels"],
+  "properties": {
+    "core_movement": {
+      "type": "string",
+      "description": "The fundamental emotional/thematic transformation the story enacts"
+    },
+    "target_effect": {
+      "type": "object",
+      "description": "What change we want in the audience",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Who is this story for"
+        },
+        "current_belief": {
+          "type": "string",
+          "description": "What the audience currently believes or feels"
+        },
+        "desired_belief": {
+          "type": "string",
+          "description": "What we want them to believe or feel after"
+        }
+      },
+      "required": ["audience", "current_belief", "desired_belief"]
+    },
+    "levels": {
+      "type": "object",
+      "properties": {
+        "abstract": {
+          "$ref": "#/definitions/abstract_level"
+        },
+        "concrete": {
+          "$ref": "#/definitions/concrete_level"
+        },
+        "structure": {
+          "$ref": "#/definitions/structure_level"
+        },
+        "scenes": {
+          "$ref": "#/definitions/scene_level"
+        }
+      },
+      "required": ["abstract", "concrete", "structure"]
+    }
+  },
+  "definitions": {
+    "weight": {
+      "type": "string",
+      "enum": ["heavy", "medium", "light"],
+      "description": "Metaphorical weight - how central this element is to the theme"
+    },
+    "abstract_level": {
+      "type": "object",
+      "description": "Level 1: Abstract metaphor mappings",
+      "properties": {
+        "protagonist": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "antagonist": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "trap_mechanism": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "catalyst": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "difficult_choice": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "stakes": {
+          "$ref": "#/definitions/abstract_node"
+        },
+        "allies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/abstract_node"
+          }
+        },
+        "obstacles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/abstract_node"
+          }
+        }
+      },
+      "required": ["protagonist", "antagonist", "trap_mechanism", "catalyst", "difficult_choice"]
+    },
+    "abstract_node": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "What this element represents abstractly"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "function": {
+          "type": "string",
+          "description": "What role this plays in the core movement"
+        }
+      },
+      "required": ["description", "weight"]
+    },
+    "concrete_level": {
+      "type": "object",
+      "description": "Level 2: Concrete instantiation of abstract elements",
+      "properties": {
+        "instantiation_type": {
+          "type": "string",
+          "description": "The world/setting category (e.g., 'ethnic_secession', 'corporate_escape', 'family_drama')"
+        },
+        "world": {
+          "type": "object",
+          "properties": {
+            "setting": {
+              "type": "string"
+            },
+            "time_period": {
+              "type": "string"
+            },
+            "genre": {
+              "type": "string"
+            },
+            "tone": {
+              "type": "string"
+            }
+          }
+        },
+        "mappings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/concrete_mapping"
+          },
+          "description": "Maps each abstract element to its concrete form"
+        }
+      },
+      "required": ["instantiation_type", "mappings"]
+    },
+    "concrete_mapping": {
+      "type": "object",
+      "properties": {
+        "concrete": {
+          "type": "string",
+          "description": "The concrete instantiation of this abstract element"
+        },
+        "details": {
+          "type": "string",
+          "description": "Specific details that flesh out this element"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "resonance": {
+          "type": "string",
+          "description": "Why this concrete choice resonates with the abstract meaning"
+        }
+      },
+      "required": ["concrete", "details"]
+    },
+    "structure_level": {
+      "type": "object",
+      "description": "Level 3: Three-act story structure",
+      "properties": {
+        "act_1_ordinary_world": {
+          "$ref": "#/definitions/act"
+        },
+        "act_2_ordeal": {
+          "$ref": "#/definitions/act"
+        },
+        "act_3_new_world": {
+          "$ref": "#/definitions/act"
+        }
+      },
+      "required": ["act_1_ordinary_world", "act_2_ordeal", "act_3_new_world"]
+    },
+    "act": {
+      "type": "object",
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "description": "What this act accomplishes for the ego consciousness journey"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/structure_node"
+          }
+        }
+      },
+      "required": ["purpose", "nodes"]
+    },
+    "structure_node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this node"
+        },
+        "name": {
+          "type": "string",
+          "description": "Short name for this story beat"
+        },
+        "content": {
+          "type": "string",
+          "description": "What happens in this beat"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "What this beat accomplishes thematically"
+        },
+        "elements_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Which concrete elements appear in this beat"
+        },
+        "echo": {
+          "type": "string",
+          "description": "How this beat echoes or foreshadows other parts of the story"
+        }
+      },
+      "required": ["id", "name", "content", "weight"]
+    },
+    "scene_level": {
+      "type": "array",
+      "description": "Level 4 (optional): Leaf nodes - actual scenes",
+      "items": {
+        "$ref": "#/definitions/scene_node"
+      }
+    },
+    "scene_node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "parent_structure_node": {
+          "type": "string",
+          "description": "Which structure node this scene belongs to"
+        },
+        "location": {
+          "type": "string"
+        },
+        "characters_present": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "type": "string",
+          "description": "What happens in this scene"
+        },
+        "dialogue_notes": {
+          "type": "string",
+          "description": "Key dialogue beats or themes"
+        },
+        "visual_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Important visual details (each is a metaphor)"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "metaphor_function": {
+          "type": "string",
+          "description": "What metaphorical work this scene does"
+        }
+      },
+      "required": ["id", "parent_structure_node", "action", "weight"]
+    }
+  }
+}
